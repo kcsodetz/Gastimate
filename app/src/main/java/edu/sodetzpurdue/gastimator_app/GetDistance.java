@@ -16,6 +16,13 @@ public class GetDistance {
     public final String APIKEY = "AIzaSyD7GjH80EBchoi53fNvVRWGhBrWaPGP_iw";
 
     /**
+     * Default constructor
+     */
+    public GetDistance(){
+
+    }
+
+    /**
      * @return origin, string containing name of origin place with " " replaced with "+"
      */
 //    public String getOrigin()
@@ -30,14 +37,14 @@ public class GetDistance {
     /**
      * @return dest, string containing name of destination place with " " replaced with "+"
      */
-    public String getDestination()
-    {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter destination: ");
-        String dest0 = input.nextLine();
-        String dest = dest0.replace(" ","+");
-        return dest;
-    }
+//    public String getDestination()
+//    {
+//        Scanner input = new Scanner(System.in);
+//        System.out.print("Enter destination: ");
+//        String dest0 = input.nextLine();
+//        String dest = dest0.replace(" ","+");
+//        return dest;
+//    }
 
     /**
      * Connects to the api and gets the response string
@@ -60,10 +67,11 @@ public class GetDistance {
         {
             io.printStackTrace();
         }
-        assert response != null;
         try(Scanner scanner = new Scanner(response))
         {
             return scanner.useDelimiter("\\A").next();
+        } catch (Exception e){
+            return "EMPTY";
         }
     }
 
@@ -76,7 +84,7 @@ public class GetDistance {
     {
         //System.out.println(APIReturn);
         String distance = APIReturn.substring(APIReturn.indexOf("distance")+42, APIReturn.indexOf(" mi"));
-       // String parsed =  parsed0.replace(",","");
+        distance = distance.replace(",","");
         return Double.parseDouble(distance);
     }
 
@@ -85,7 +93,6 @@ public class GetDistance {
      * @return parsed, double containing total hour needed for travel
      */
     public String parseTime(String APIReturn) {
-        String time = APIReturn.substring(APIReturn.indexOf("duration")+42, APIReturn.indexOf(" mins")+5);
-        return time;
+        return APIReturn.substring(APIReturn.indexOf("duration")+42, APIReturn.indexOf(" mins")+5);
     }
 }
