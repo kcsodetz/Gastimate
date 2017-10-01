@@ -1,10 +1,12 @@
 package edu.sodetzpurdue.gastimator_app;
 
+import java.io.Serializable;
+
 /**
  * Created by shiva on 10/1/2017.
  */
 
-public class Car {
+public class Car implements Serializable{
     private String make, model, year;
     private double hwy, city;
 

@@ -1,4 +1,5 @@
 package edu.sodetzpurdue.gastimator_app;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,12 @@ import android.widget.Toast;
  */
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener{
 
+//    SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+//
+//    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//    Gson gson = new Gson();
+
+
     EditText makeText, modelText, yearText;
     String make = "Make";
     String model = "Model";
@@ -27,6 +34,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public final int NO_YEAR = 2;
     public final int VEHICLE_DOES_NOT_EXIST = 3;
     public final int SUCCESS = 4;
+    public final int DEFAULT = 5;
     GetCarInfo getCarInfo = new GetCarInfo();
     Car newCar;
 
@@ -74,6 +82,12 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                             hwy = getCarInfo.getHighwayMPG(response);
                             city = getCarInfo.getCityMPG(response);
                             newCar = new Car(make,model,yearString, hwy, city);
+//                            String json = gson.toJson(newCar);
+//                            prefsEditor.putString("MyObject", json);
+//                            prefsEditor.commit();
+                            Intent intent = new Intent(AddVehicleActivity.this, VehicleListActivity.class);
+                            intent.putExtra("car", newCar);
+                            startActivity(intent);
                         }
                     }
                 }
@@ -101,6 +115,9 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 break;
             case SUCCESS:
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                break;
+            case DEFAULT:
+                Toast.makeText(this, "Please input values", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
