@@ -20,7 +20,7 @@ public class DestinationActivity extends AppCompatActivity {
     public final int NO_DESTINATION = 1;
     public final int SUCCESS = 2;
     public final int DEFAULT = 3;
-    String time;
+    int timeHours, timeMin;
     double distance;
     GetDistance getDistance = new GetDistance();
     @Override
@@ -55,11 +55,13 @@ public class DestinationActivity extends AppCompatActivity {
                 }
                 else {
                     messageToast(SUCCESS);
-                    //time = getDistance.parseTime(response);
+                    timeHours = getDistance.parseTime(response, 1);
+                    timeMin = getDistance.parseTime(response, 2);
+                    String time = timeHours+" hour(s) and "+timeMin+" minutes";
                     distance = getDistance.parseDistance(response);
                     //System.out.println(time);
                     System.out.println(distance);
-                    trip = new Trip("none", distance, car.getHwy(), car.getCity());
+                    trip = new Trip(time, distance, car.getHwy(), car.getCity());
                     Intent intent1 = new Intent(DestinationActivity.this, GastimatorActivity.class);
                     intent1.putExtra("trip", trip);
                     startActivity(intent1);
