@@ -39,10 +39,10 @@ public class GastimatorActivity extends AppCompatActivity {
 
         double cost = 2.51 * gasReq;
 
-        String distanceString = "This trip is " + distance + " miles!";
-        String gasString = String.format("%.2f",gasReq);
+        String distanceString = "This trip is " + distance + " miles! Stay safe and fuel up!";
+        String gasString = String.format("%.2f Gallons",gasReq);
         String timeString = time;
-        String costString = String.format("%.2f",cost);
+        String costString = String.format("$ %.2f",cost);
 
         gasText.setText(gasString);
         timeText.setText(timeString);
