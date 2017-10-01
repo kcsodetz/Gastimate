@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.sodetzpurdue.gastimator_app.AddVehicleActivity">
+
+    <EditText
+        android:id="@+id/makeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/make"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
+        android:id="@+id/modelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/model"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <EditText
+        android:id="@+id/yearText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/year"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_vehicle"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="364dp" />
+
+    <TextView
+        android:id="@+id/hwyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/highway_mpg"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city_mpg"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="250dp" />
+</android.support.constraint.ConstraintLayout>
