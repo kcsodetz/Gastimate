@@ -20,7 +20,6 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     String model = "Model";
     String yearString = "Year";
     String response = "empty";
-    int year;
     double hwy, city;
     Button okButton;
     public final int NO_MODEL = 0;
@@ -30,7 +29,6 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public final int SUCCESS = 4;
     GetCarInfo getCarInfo = new GetCarInfo();
     Car newCar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +57,24 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         else if(yearString.equals("")) {
                             messageToast(NO_YEAR);
                         }
-                        if(make != null && model != null && yearString != null) {
+                        if(make != null && model != null && yearString != null &&
+                                !make.equalsIgnoreCase("make") && !model.equalsIgnoreCase("model")
+                                 &&!yearString.equalsIgnoreCase("year")) {
                             response = getCarInfo.shineConnect(make, model, yearString);
                         }
                         if (response.equals("[]")){
                             messageToast(VEHICLE_DOES_NOT_EXIST);
                         }
+                        else  if(make.equalsIgnoreCase("make") || model.equalsIgnoreCase("model") ||
+                                yearString.equalsIgnoreCase("year")) {
+                            System.out.println();
+                        }
                         else {
                             messageToast(SUCCESS);
                             hwy = getCarInfo.getHighwayMPG(response);
                             city = getCarInfo.getCityMPG(response);
+                            newCar = new Car(make,model,yearString, hwy, city);
                         }
-                        year = Integer.parseInt(yearString);
-                        newCar = new Car(make,model,year);
                     }
                 }
         );

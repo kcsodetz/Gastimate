@@ -5,13 +5,15 @@ package edu.sodetzpurdue.gastimator_app;
  */
 
 public class Car {
-    private String make, model;
-    private int year;
+    private String make, model, year;
+    private double hwy, city;
 
-    public Car(String make, String model, int year) {
+    public Car(String make, String model, String year, double hwy, double city) {
         this.make = make;
         this.model = model;
         this.year = year;
+        double hwy1 = hwy;
+        this.city = city;
     }
 
     public String getMake() {
@@ -30,11 +32,15 @@ public class Car {
         this.model = model;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public double getCity() {
+        return city;
+    }
+
+    public double getHwy() {
+        return hwy;
     }
 }
