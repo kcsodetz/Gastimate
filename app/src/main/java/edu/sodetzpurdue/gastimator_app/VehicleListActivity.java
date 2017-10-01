@@ -21,9 +21,9 @@ public class VehicleListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+        final SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
+        final Gson gson = new Gson();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_car);
         lv = (ListView) findViewById(R.id.listView);
@@ -51,10 +51,12 @@ public class VehicleListActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){
-//                Intent intent1 = new Intent(this, .class);
-//                String key = (String) adapter.getAdapter().getItem(position);
-//                intent1.putExtra("car", (Car) keys.get(key));
-//                startActivity(intent1);
+                Intent intent1 = new Intent(VehicleListActivity.this, DestinationActivity.class);
+                String key = (String) adapter.getAdapter().getItem(position);
+                String json = mPrefs.getString(key, "");
+                Car car = gson.fromJson(json, Car.class);
+                intent1.putExtra("car", car);
+                startActivity(intent1);
             }
         }
 
