@@ -1,4 +1,6 @@
 package edu.sodetzpurdue.gastimator_app;
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -30,7 +32,7 @@ public class GetCarInfo{
      * @param year, year of the vehicle
      * @return responseBody, string response of the API call
      */
-    public String shineConnect(String make, String model, String year)
+    public String shineConnect (String make, String model, String year)
     {
         String charset = "UTF-8";
         InputStream response = null;
