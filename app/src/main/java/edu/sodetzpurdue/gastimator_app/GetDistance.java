@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 
 public class GetDistance {
+
     public final String APIKEY = "AIzaSyD7GjH80EBchoi53fNvVRWGhBrWaPGP_iw";
 
     /**
@@ -21,30 +22,6 @@ public class GetDistance {
     public GetDistance(){
 
     }
-
-    /**
-     * @return origin, string containing name of origin place with " " replaced with "+"
-     */
-//    public String getOrigin()
-//    {
-//        Scanner input = new Scanner(System.in);
-//        System.out.print("Enter origin: ");
-//        String origin0 = input.nextLine();
-//        String origin = origin0.replace(" ","+");
-//        return origin;
-//    }
-
-    /**
-     * @return dest, string containing name of destination place with " " replaced with "+"
-     */
-//    public String getDestination()
-//    {
-//        Scanner input = new Scanner(System.in);
-//        System.out.print("Enter destination: ");
-//        String dest0 = input.nextLine();
-//        String dest = dest0.replace(" ","+");
-//        return dest;
-//    }
 
     /**
      * Connects to the api and gets the response string
