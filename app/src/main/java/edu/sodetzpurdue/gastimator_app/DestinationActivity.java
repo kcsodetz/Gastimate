@@ -59,7 +59,6 @@ public class DestinationActivity extends AppCompatActivity {
                     timeMin = getDistance.parseTime(response, 2);
                     String time = timeHours+" hour(s) and "+timeMin+" minutes";
                     distance = getDistance.parseDistance(response);
-                    //System.out.println(time);
                     System.out.println(distance);
                     trip = new Trip(time, distance, car.getHwy(), car.getCity());
                     Intent intent1 = new Intent(DestinationActivity.this, GastimatorActivity.class);
