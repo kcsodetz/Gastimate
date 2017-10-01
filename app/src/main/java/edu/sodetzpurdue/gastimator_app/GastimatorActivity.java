@@ -17,6 +17,7 @@ public class GastimatorActivity extends AppCompatActivity {
         Trip trip = (Trip)intent.getSerializableExtra("trip");
         gasText = (TextView) findViewById(R.id.gasD);
         timeText = (TextView) findViewById(R.id.timeS);
+        messageText = (TextView) findViewById(R.id.message);
 
         double distance = trip.getDistance();
         double gasReq;
