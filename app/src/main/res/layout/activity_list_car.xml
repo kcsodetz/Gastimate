@@ -22,6 +22,14 @@
     <ListView
         android:id="@id/listView"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_gravity="bottom"
+        android:layout_height="468dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Vehicle!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 </android.support.design.widget.CoordinatorLayout>
