@@ -1,6 +1,7 @@
 package edu.sodetzpurdue.gastimator_app;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,8 @@ public class DestinationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         gastimate = (Button)findViewById(R.id.gastimateButton);
         gastimate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +46,14 @@ public class DestinationActivity extends AppCompatActivity {
                         !originString.equalsIgnoreCase("Origin") && !destinationString.equalsIgnoreCase("Destination")) {
                         response = getDistance.googleMapsConnect(originString, destinationString);
                 }
-                messageToast(SUCCESS);
-                time = getDistance.parseTime(response);
-                distance = getDistance.parseDistance(response);
-
+                if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS")){
+                    messageToast(DEFAULT);
+                }
+                else {
+                    messageToast(SUCCESS);
+                    time = getDistance.parseTime(response);
+                    distance = getDistance.parseDistance(response);
+                }
 
             }
         });
