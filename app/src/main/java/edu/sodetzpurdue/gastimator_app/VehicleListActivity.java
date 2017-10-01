@@ -26,6 +26,7 @@ public class VehicleListActivity extends AppCompatActivity {
         final Gson gson = new Gson();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_car);
+        this.setTitle("Choose or Add a Vehicle");
         lv = (ListView) findViewById(R.id.listView);
         final Intent intent = getIntent();
         if (intent.hasExtra("car")){

@@ -44,6 +44,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_add_vehicle);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        this.setTitle("Add a Vehicle");
         okButton = (Button)findViewById(R.id.okButton);
         okButton.setOnClickListener(
                 new View.OnClickListener() {

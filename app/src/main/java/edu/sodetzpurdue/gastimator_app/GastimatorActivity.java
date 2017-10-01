@@ -16,6 +16,7 @@ public class GastimatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gastimator);
         Intent intent = getIntent();
         Trip trip = (Trip)intent.getSerializableExtra("trip");
+        this.setTitle("Results");
         gasText = (TextView) findViewById(R.id.gasD);
         timeText = (TextView) findViewById(R.id.timeS);
         messageText = (TextView) findViewById(R.id.message);

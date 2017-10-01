@@ -29,6 +29,7 @@ public class DestinationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_destination);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        this.setTitle("Enter a Destination");
         final Intent intent = getIntent();
         final Car car = (Car)intent.getSerializableExtra("car");
         System.out.println("Highway: " +car.getHwy());
