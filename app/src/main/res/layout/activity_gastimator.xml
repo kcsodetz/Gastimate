@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/gasD"
-        android:layout_width="369dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -19,11 +19,11 @@
         android:text="Gas Double"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintVertical_bias="0.339" />
 
     <TextView
         android:id="@+id/textView4"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/timeS"
-        android:layout_width="376dp"
+        android:layout_width="match_parent"
         android:layout_height="77dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -80,7 +80,7 @@
 
     <TextView
         android:id="@+id/message"
-        android:layout_width="371dp"
+        android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
@@ -126,5 +126,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.648" />
+        app:layout_constraintVertical_bias="0.643" />
 </android.support.constraint.ConstraintLayout>
