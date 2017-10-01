@@ -75,7 +75,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         }
                         else  if(make.equalsIgnoreCase("make") || model.equalsIgnoreCase("model") ||
                                 yearString.equalsIgnoreCase("year")) {
-                            System.out.println();
+                            messageToast(DEFAULT);
                         }
                         else {
                             messageToast(SUCCESS);

@@ -71,7 +71,7 @@
         android:layout_marginLeft="54dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="OK"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.401"
         app:layout_constraintLeft_toLeftOf="parent"

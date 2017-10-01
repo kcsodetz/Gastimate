@@ -14,7 +14,7 @@ public class Car implements Serializable{
         this.make = make;
         this.model = model;
         this.year = year;
-        double hwy1 = hwy;
+        this.hwy = hwy;
         this.city = city;
     }
 

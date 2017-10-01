@@ -40,8 +40,8 @@ public class DestinationActivity extends AppCompatActivity {
                     messageToast(NO_DESTINATION);
                 }
                 if(originString != null && destinationString != null &&
-                        !originString.equalsIgnoreCase("make") && !destinationString.equalsIgnoreCase("model")) {
-                    response = getDistance.googleMapsConnect(originString, destinationString);
+                        !originString.equalsIgnoreCase("Origin") && !destinationString.equalsIgnoreCase("Destination")) {
+                        response = getDistance.googleMapsConnect(originString, destinationString);
                 }
                 messageToast(SUCCESS);
                 time = getDistance.parseTime(response);
