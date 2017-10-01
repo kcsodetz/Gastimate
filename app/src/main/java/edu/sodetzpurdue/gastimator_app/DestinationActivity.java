@@ -28,6 +28,9 @@ public class DestinationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_destination);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        Intent intent = getIntent();
+        Car car = (Car)intent.getSerializableExtra("car");
+        System.out.println("Highway: " +car.getHwy());
         gastimate = (Button)findViewById(R.id.gastimateButton);
         gastimate.setOnClickListener(new View.OnClickListener() {
             @Override

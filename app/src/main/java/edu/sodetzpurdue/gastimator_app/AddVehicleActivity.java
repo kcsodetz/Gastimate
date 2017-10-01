@@ -69,13 +69,13 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                                 !make.equalsIgnoreCase("make") && !model.equalsIgnoreCase("model")
                                  &&!yearString.equalsIgnoreCase("year")) {
                             response = getCarInfo.shineConnect(make, model, yearString);
-                        if(make.equalsIgnoreCase("make") || model.equalsIgnoreCase("model") ||
-                                    yearString.equalsIgnoreCase("year")) {
-                                messageToast(DEFAULT);
-                            }
                         }
-                        else if (response.equals("[]")){
+                        if (response.equals("[]")){
                             messageToast(VEHICLE_DOES_NOT_EXIST);
+                        }
+                        else if(make.equalsIgnoreCase("make") || model.equalsIgnoreCase("model") ||
+                                yearString.equalsIgnoreCase("year")) {
+                            messageToast(DEFAULT);
                         }
                         else {
                             messageToast(SUCCESS);
