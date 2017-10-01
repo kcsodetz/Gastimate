@@ -29,6 +29,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public final int VEHICLE_DOES_NOT_EXIST = 3;
     public final int SUCCESS = 4;
     GetCarInfo getCarInfo = new GetCarInfo();
+    Car newCar;
 
 
     @Override
@@ -69,6 +70,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                             hwy = getCarInfo.getHighwayMPG(response);
                             city = getCarInfo.getCityMPG(response);
                         }
+                        year = Integer.parseInt(yearString);
+                        newCar = new Car(make,model,year);
                     }
                 }
         );
