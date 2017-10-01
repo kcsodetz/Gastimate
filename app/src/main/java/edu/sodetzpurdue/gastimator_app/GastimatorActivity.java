@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class GastimatorActivity extends AppCompatActivity {
-    TextView gasText, timeText;
+    TextView gasText, timeText, messageText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class GastimatorActivity extends AppCompatActivity {
 
         gasText.setText(gasString);
         timeText.setText(timeString);
+        messageText.setText(distanceString);
+
 
     }
 }
