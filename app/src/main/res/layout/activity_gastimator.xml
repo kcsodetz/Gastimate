@@ -17,7 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Gas Double"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
