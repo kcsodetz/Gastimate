@@ -53,6 +53,8 @@ public class DestinationActivity extends AppCompatActivity {
                     messageToast(SUCCESS);
                     time = getDistance.parseTime(response);
                     distance = getDistance.parseDistance(response);
+                    System.out.println(time);
+                    System.out.println(distance);
                 }
 
             }

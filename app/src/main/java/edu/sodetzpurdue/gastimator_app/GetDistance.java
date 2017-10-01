@@ -84,7 +84,7 @@ public class GetDistance {
     {
         //System.out.println(APIReturn);
         String distance = APIReturn.substring(APIReturn.indexOf("distance")+42, APIReturn.indexOf(" mi"));
-       // String parsed =  parsed0.replace(",","");
+        distance = distance.replace(",","");
         return Double.parseDouble(distance);
     }
 
@@ -93,7 +93,6 @@ public class GetDistance {
      * @return parsed, double containing total hour needed for travel
      */
     public String parseTime(String APIReturn) {
-        String time = APIReturn.substring(APIReturn.indexOf("duration")+42, APIReturn.indexOf(" mins")+5);
-        return time;
+        return APIReturn.substring(APIReturn.indexOf("duration")+42, APIReturn.indexOf(" mins")+5);
     }
 }
