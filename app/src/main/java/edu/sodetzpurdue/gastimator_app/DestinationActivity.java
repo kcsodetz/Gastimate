@@ -1,5 +1,6 @@
 package edu.sodetzpurdue.gastimator_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,6 @@ public class DestinationActivity extends AppCompatActivity {
                         !originString.equalsIgnoreCase("make") && !destinationString.equalsIgnoreCase("model")) {
                     response = getDistance.googleMapsConnect(originString, destinationString);
                 }
-
 
             }
         });
