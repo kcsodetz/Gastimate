@@ -1,6 +1,7 @@
 package edu.sodetzpurdue.gastimator_app;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -34,8 +35,10 @@ public class GastimatorActivity extends AppCompatActivity {
             gasReq = distance/HighwayMPG;
         }
 
+
+
         String distanceString = "This trip is " + distance + " miles!";
-        String gasString = "You need " + gasReq + " gallons of gas for the trip!!";
+        String gasString = "You need " + String.format("%.3g%n",gasReq) + " gallons of gas for the trip!!";
         String timeString = "You need " + time + " to get to your Destination!";
 
         gasText.setText(gasString);
