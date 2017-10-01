@@ -22,7 +22,7 @@ public class VehicleListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        final SharedPreferences.Editor prefsEditor = mPrefs.edit();
         final Gson gson = new Gson();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_car);
@@ -36,14 +36,14 @@ public class VehicleListActivity extends AppCompatActivity {
             prefsEditor.putString(car.getModel(), json);
             prefsEditor.apply();
         }
-        List<String> carList = new ArrayList<>();
+        final List<String> carList = new ArrayList<>();
         final Map<String,?> keys = mPrefs.getAll();
 
         for(Map.Entry<String,?> entry : keys.entrySet()){
             carList.add(entry.getKey());
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_expandable_list_item_1,
                 carList);
 
@@ -62,6 +62,33 @@ public class VehicleListActivity extends AppCompatActivity {
         }
 
         );
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long arg3) {
+
+                prefsEditor.remove(parent.getItemAtPosition(position).toString());
+                prefsEditor.commit();
+                carList.remove(removeElement(parent.getItemAtPosition(position).toString(), carList));
+
+                arrayAdapter.notifyDataSetChanged();
+
+                return true;
+            }
+
+        });
+    }
+
+    public static int removeElement(String element, List<String> items)
+    {
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).equals(element))
+                return i;
+        }
+        return -1;
     }
 
     public void pressedFAB(View view){
