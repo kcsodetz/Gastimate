@@ -6,11 +6,13 @@ package edu.sodetzpurdue.gastimator_app;
 
 public class Trip {
     private String time;
-    private double distance;
+    private double distance, carHighwayMPG, carCityMPG;
 
-    public Trip(String time, double distance) {
+    public Trip(String time, double distance, double carHighwayMPG, double carCityMPG) {
         this.time = time;
         this.distance = distance;
+        this.carHighwayMPG = carHighwayMPG;
+        this.carCityMPG = carCityMPG;
     }
 
     public String getTime() {
@@ -19,5 +21,13 @@ public class Trip {
 
     public double getDistance() {
         return distance;
+    }
+
+    public double getCarHighwayMPG() {
+        return carHighwayMPG;
+    }
+
+    public double getCarCityMPG() {
+        return carCityMPG;
     }
 }
