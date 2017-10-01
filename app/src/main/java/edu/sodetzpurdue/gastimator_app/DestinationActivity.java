@@ -15,6 +15,7 @@ public class DestinationActivity extends AppCompatActivity {
     String originString = "Origin";
     String destinationString = "Destination";
     String response = "empty";
+    Trip trip;
     public final int NO_ORIGIN = 0;
     public final int NO_DESTINATION = 1;
     public final int SUCCESS = 2;
@@ -28,8 +29,8 @@ public class DestinationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_destination);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Intent intent = getIntent();
-        Car car = (Car)intent.getSerializableExtra("car");
+        final Intent intent = getIntent();
+        final Car car = (Car)intent.getSerializableExtra("car");
         System.out.println("Highway: " +car.getHwy());
         gastimate = (Button)findViewById(R.id.gastimateButton);
         gastimate.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +59,10 @@ public class DestinationActivity extends AppCompatActivity {
                     distance = getDistance.parseDistance(response);
                     //System.out.println(time);
                     System.out.println(distance);
+                    trip = new Trip("none", distance, car.getHwy(), car.getCity());
+                    Intent intent1 = new Intent(DestinationActivity.this, GastimatorActivity.class);
+                    intent1.putExtra("trip", trip);
+                    startActivity(intent);
                 }
 
             }
