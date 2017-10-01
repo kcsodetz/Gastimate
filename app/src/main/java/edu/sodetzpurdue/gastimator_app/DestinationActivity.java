@@ -62,7 +62,7 @@ public class DestinationActivity extends AppCompatActivity {
                     trip = new Trip("none", distance, car.getHwy(), car.getCity());
                     Intent intent1 = new Intent(DestinationActivity.this, GastimatorActivity.class);
                     intent1.putExtra("trip", trip);
-                    startActivity(intent);
+                    startActivity(intent1);
                 }
 
             }
