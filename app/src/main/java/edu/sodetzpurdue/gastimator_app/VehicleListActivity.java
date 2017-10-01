@@ -1,6 +1,9 @@
 package edu.sodetzpurdue.gastimator_app;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -28,7 +31,10 @@ public class VehicleListActivity extends AppCompatActivity {
         lv.setAdapter(arrayAdapter);
     }
 
-    
+    public void pressedFAB(View view){
+        Intent intent = new Intent(this, AddVehicleActivity.class);
+        startActivity(intent);
+    }
 
 
 }
