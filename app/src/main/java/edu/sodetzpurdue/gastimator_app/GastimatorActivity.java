@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class GastimatorActivity extends AppCompatActivity {
-    TextView gasText, timeText, messageText;
+    TextView gasText, timeText, messageText, costText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,14 @@ public class GastimatorActivity extends AppCompatActivity {
         gasText = (TextView) findViewById(R.id.gasD);
         timeText = (TextView) findViewById(R.id.timeS);
         messageText = (TextView) findViewById(R.id.message);
+        costText = (TextView) findViewById(R.id.cost);
 
         double distance = trip.getDistance();
         double gasReq;
         double CityMPG = trip.getCarCityMPG();
         double HighwayMPG = trip.getCarHighwayMPG();
         String time = trip.getTime();
+
 
         if(distance>40)
         {
@@ -35,15 +37,17 @@ public class GastimatorActivity extends AppCompatActivity {
             gasReq = distance/HighwayMPG;
         }
 
-
+        double cost = 2.51 * gasReq;
 
         String distanceString = "This trip is " + distance + " miles!";
-        String gasString = "You need " + String.format("%.3g%n",gasReq) + " gallons of gas for the trip!!";
-        String timeString = "You need " + time + " to get to your Destination!";
+        String gasString = String.format("%.2f",gasReq);
+        String timeString = time;
+        String costString = String.format("%.2f",cost);
 
         gasText.setText(gasString);
         timeText.setText(timeString);
         messageText.setText(distanceString);
+        costText.setText(costString);
 
 
     }
