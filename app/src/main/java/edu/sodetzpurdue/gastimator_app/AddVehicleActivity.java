@@ -1,4 +1,5 @@
 package edu.sodetzpurdue.gastimator_app;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,10 @@ import android.widget.Toast;
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText makeText, modelText, yearText;
-    String make, model, yearString, response;
+    String make = "Make";
+    String model = "Model";
+    String yearString = "Year";
+    String response = "empty";
     int year;
     double hwy, city;
     Button okButton;
@@ -31,7 +35,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vehicle);
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         okButton = (Button)findViewById(R.id.okButton);
         okButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -42,6 +47,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         yearText = (EditText)findViewById(R.id.yearText);
                         make = makeText.getText().toString();
                         model = modelText.getText().toString();
+                        make = make.trim();
                         yearString = yearText.getText().toString();
                         if(make.equals("")) {
                             messageToast(NO_MAKE);
@@ -52,7 +58,9 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         else if(yearString.equals("")) {
                             messageToast(NO_YEAR);
                         }
-                        response = getCarInfo.shineConnect(make, model, yearString);
+                        if(make != null && model != null && yearString != null) {
+                            response = getCarInfo.shineConnect(make, model, yearString);
+                        }
                         if (response.equals("[]")){
                             messageToast(VEHICLE_DOES_NOT_EXIST);
                         }

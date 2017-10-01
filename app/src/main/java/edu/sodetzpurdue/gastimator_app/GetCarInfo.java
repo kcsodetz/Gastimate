@@ -1,5 +1,4 @@
 package edu.sodetzpurdue.gastimator_app;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -13,7 +12,7 @@ import java.util.Scanner;
  * @since 9/30/2017
  */
 
-public class GetCarInfo {
+public class GetCarInfo{
 
     private final String APIKEY = "A8874x8oBWR0GdYXGccI2tYFFULXur7a";
 
@@ -44,10 +43,12 @@ public class GetCarInfo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        {
-            try(Scanner scanner = new Scanner(response)) {
+
+        try(Scanner scanner = new Scanner(response)) {
                  return scanner.useDelimiter("\\A").next();
-            }
+        } catch (Exception e){
+            System.err.println("Response is null");
+            return "[]";
         }
     }
 
