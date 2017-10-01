@@ -7,13 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 public class VehicleListActivity extends AppCompatActivity {
 
@@ -68,19 +65,22 @@ public class VehicleListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long arg3) {
-
                 prefsEditor.remove(parent.getItemAtPosition(position).toString());
                 prefsEditor.commit();
                 carList.remove(removeElement(parent.getItemAtPosition(position).toString(), carList));
-
                 arrayAdapter.notifyDataSetChanged();
-
                 return true;
             }
 
         });
     }
 
+    /**
+     * Removes from List based on given element
+     * @param element element to be removed
+     * @param items list to remove from
+     * @return -1 if unsuccessful
+     */
     public static int removeElement(String element, List<String> items)
     {
         for(int i = 0; i < items.size(); i++)
@@ -91,10 +91,12 @@ public class VehicleListActivity extends AppCompatActivity {
         return -1;
     }
 
+    /**
+     * Handler for the press of the FAB
+     * @param view current view
+     */
     public void pressedFAB(View view){
         Intent intent = new Intent(this, AddVehicleActivity.class);
         startActivity(intent);
     }
-
-
 }
