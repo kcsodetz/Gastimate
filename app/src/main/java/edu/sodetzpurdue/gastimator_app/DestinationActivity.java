@@ -18,6 +18,8 @@ public class DestinationActivity extends AppCompatActivity {
     public final int NO_DESTINATION = 1;
     public final int SUCCESS = 2;
     public final int DEFAULT = 3;
+    String time;
+    double distance;
     GetDistance getDistance = new GetDistance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,10 @@ public class DestinationActivity extends AppCompatActivity {
                         !originString.equalsIgnoreCase("make") && !destinationString.equalsIgnoreCase("model")) {
                     response = getDistance.googleMapsConnect(originString, destinationString);
                 }
+                messageToast(SUCCESS);
+                time = getDistance.parseTime(response);
+                distance = getDistance.parseDistance(response);
+
 
             }
         });

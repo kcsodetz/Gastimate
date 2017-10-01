@@ -70,13 +70,22 @@ public class GetDistance {
 
     /**
      * @param APIReturn, string returned by google's api
-     * @return parsed, double containing number of miles between the points
+     * @return parsed, double containing number of miles between points
      */
-    public double parseAPIReturn(String APIReturn)
+    public double parseDistance(String APIReturn)
     {
         //System.out.println(APIReturn);
-        String parsed0 = APIReturn.substring(APIReturn.indexOf("distance")+42, APIReturn.indexOf(" mi"));
-        String parsed =  parsed0.replace(",","");
-        return Double.parseDouble(parsed);
+        String distance = APIReturn.substring(APIReturn.indexOf("distance")+42, APIReturn.indexOf(" mi"));
+       // String parsed =  parsed0.replace(",","");
+        return Double.parseDouble(distance);
+    }
+
+    /**
+     * @param APIReturn, string returned by google's api
+     * @return parsed, double containing total hour needed for travel
+     */
+    public String parseTime(String APIReturn) {
+        String time = APIReturn.substring(APIReturn.indexOf("duration")+42, APIReturn.indexOf(" mins")+5);
+        return time;
     }
 }
