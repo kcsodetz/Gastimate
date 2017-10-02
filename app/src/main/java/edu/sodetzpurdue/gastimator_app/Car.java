@@ -10,6 +10,14 @@ public class Car implements Serializable{
     private String make, model, year;
     private double hwy, city;
 
+    /**
+     * Default Constructor
+     * @param make make of the vehicle
+     * @param model model of the vehicle
+     * @param year year of the vehicle
+     * @param hwy highway fuel economy
+     * @param city city fuel economy
+     */
     public Car(String make, String model, String year, double hwy, double city) {
         this.make = make;
         this.model = model;

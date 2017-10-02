@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class DestinationActivity extends AppCompatActivity {
+
     private EditText origin, destination;
     Button gastimate;
     String originString = "Origin";
