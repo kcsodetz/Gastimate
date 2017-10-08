@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/gasD"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/timeS"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="77dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -86,7 +86,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="-1dp"
         android:text="Message"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintHorizontal_bias="0.0"
@@ -107,7 +106,9 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/cost"
@@ -124,5 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.643"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 </android.support.constraint.ConstraintLayout>
