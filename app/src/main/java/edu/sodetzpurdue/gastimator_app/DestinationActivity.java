@@ -13,14 +13,15 @@ public class DestinationActivity extends AppCompatActivity {
 
     private EditText origin, destination;
     Button gastimateBtn;
-    String originString = "Origin";
-    String destinationString = "Destination";
-    String response = "empty";
+    String originString;
+    String destinationString;
+    String response;
     Trip trip;
     public final int NO_ORIGIN = 0;
     public final int NO_DESTINATION = 1;
     public final int SUCCESS = 2;
     public final int DEFAULT = 3;
+    public final int NO_CONNECTION = 4;
     int timeHours, timeMin;
     double distance;
     GetDistance getDistance = new GetDistance();
@@ -65,6 +66,9 @@ public class DestinationActivity extends AppCompatActivity {
                     if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS") || response.contains("NOT_FOUND")){
                         messageToast(DEFAULT);
                     }
+                    else if (response.equals("EMPTY")){
+                        messageToast(NO_CONNECTION);
+                    }
                     else {
                         messageToast(SUCCESS);
                         timeHours = getDistance.parseTime(response, 1);
@@ -99,6 +103,9 @@ public class DestinationActivity extends AppCompatActivity {
                 break;
             case DEFAULT:
                 Toast.makeText(this, "Origin and/or Destination not found", Toast.LENGTH_SHORT).show();
+                break;
+            case NO_CONNECTION:
+                Toast.makeText(this, R.string.internetConnection, Toast.LENGTH_LONG).show();
                 break;
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();

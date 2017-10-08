@@ -1,4 +1,5 @@
 package edu.sodetzpurdue.gastimator_app;
+
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -9,24 +10,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * Class that Adds a Vehicle
+ * Activity to add a vehicle
  *
  * @author Ken Sodetz
  * @since 9/30/17
  */
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener{
 
-//    SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-//
-//    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//    Gson gson = new Gson();
-
-
     EditText makeText, modelText, yearText;
-    String make = "Make";
-    String model = "Model";
-    String yearString = "Year";
-    String response = "empty";
+    String make;
+    String model;
+    String yearString;
+    String response;
     double hwy, city;
     Button okButton;
     public final int NO_MODEL = 0;
@@ -34,7 +29,6 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public final int NO_YEAR = 2;
     public final int VEHICLE_DOES_NOT_EXIST = 3;
     public final int SUCCESS = 4;
-    public final int DEFAULT = 5;
     GetCarInfo getCarInfo = new GetCarInfo();
     Car newCar;
 
@@ -66,29 +60,20 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         else if(yearString.equals("")) {
                             messageToast(NO_YEAR);
                         }
-                        if(make != null && model != null && yearString != null &&
-                                !make.equalsIgnoreCase("make") && !model.equalsIgnoreCase("model")
-                                 &&!yearString.equalsIgnoreCase("year")) {
+                        else{
                             response = getCarInfo.shineConnect(make, model, yearString);
-                        }
-                        if (response.equals("[]")){
-                            messageToast(VEHICLE_DOES_NOT_EXIST);
-                        }
-                        else if(make.equalsIgnoreCase("make") || model.equalsIgnoreCase("model") ||
-                                yearString.equalsIgnoreCase("year")) {
-                            messageToast(DEFAULT);
-                        }
-                        else {
-                            messageToast(SUCCESS);
-                            hwy = getCarInfo.getHighwayMPG(response);
-                            city = getCarInfo.getCityMPG(response);
-                            newCar = new Car(make,model,yearString, hwy, city);
-//                            String json = gson.toJson(newCar);
-//                            prefsEditor.putString("MyObject", json);
-//                            prefsEditor.commit();
-                            Intent intent = new Intent(AddVehicleActivity.this, VehicleListActivity.class);
-                            intent.putExtra("car", newCar);
-                            startActivity(intent);
+                            if (response.equals("[]")){
+                                messageToast(VEHICLE_DOES_NOT_EXIST);
+                            }
+                            else {
+                                messageToast(SUCCESS);
+                                hwy = getCarInfo.getHighwayMPG(response);
+                                city = getCarInfo.getCityMPG(response);
+                                newCar = new Car(make,model,yearString, hwy, city);
+                                Intent intent = new Intent(AddVehicleActivity.this, VehicleListActivity.class);
+                                intent.putExtra("car", newCar);
+                                startActivity(intent);
+                            }
                         }
                     }
                 }
@@ -111,14 +96,12 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "You did not enter a Year", Toast.LENGTH_SHORT).show();
                 break;
             case VEHICLE_DOES_NOT_EXIST:
-                Toast.makeText(this, "The vehicle "+make+" "+model+" "+yearString+" does not exist",
+                Toast.makeText(this, "The vehicle "+make+" "+model+" "+yearString+" does not exist" +
+                                "or cannot be found.",
                         Toast.LENGTH_SHORT).show();
                 break;
             case SUCCESS:
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
-                break;
-            case DEFAULT:
-                Toast.makeText(this, "Please input values", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
