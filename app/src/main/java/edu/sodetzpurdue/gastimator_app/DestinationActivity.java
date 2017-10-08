@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class DestinationActivity extends AppCompatActivity {
 
     private EditText origin, destination;
-    Button gastimate;
+    Button gastimateBtn;
     String originString = "Origin";
     String destinationString = "Destination";
     String response = "empty";
@@ -24,18 +24,27 @@ public class DestinationActivity extends AppCompatActivity {
     int timeHours, timeMin;
     double distance;
     GetDistance getDistance = new GetDistance();
+
+    /**
+     * onCreate Method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        this.setTitle("Enter a Destination");
+        this.setTitle(getString(R.string.originDestination));
         final Intent intent = getIntent();
         final Car car = (Car)intent.getSerializableExtra("car");
         System.out.println("Highway: " +car.getHwy());
-        gastimate = (Button)findViewById(R.id.gastimateButton);
-        gastimate.setOnClickListener(new View.OnClickListener() {
+        gastimateBtn = (Button)findViewById(R.id.gastimateButton);
+        gastimateBtn.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param view current view
+             */
             @Override
             public void onClick(View view) {
                 origin = (EditText)findViewById(R.id.editText);
@@ -48,26 +57,27 @@ public class DestinationActivity extends AppCompatActivity {
                 else if(destinationString.equals("")) {
                     messageToast(NO_DESTINATION);
                 }
-                if(originString != null && destinationString != null &&
-                        !originString.equalsIgnoreCase("Origin") && !destinationString.equalsIgnoreCase("Destination")) {
-                        response = getDistance.googleMapsConnect(originString, destinationString);
-                }
-                if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS")){
+                else if(destinationString.length() < 5 || originString.length() < 5){
                     messageToast(DEFAULT);
                 }
-                else {
-                    messageToast(SUCCESS);
-                    timeHours = getDistance.parseTime(response, 1);
-                    timeMin = getDistance.parseTime(response, 2);
-                    String time = timeHours+" hour(s) and "+timeMin+" minutes";
-                    distance = getDistance.parseDistance(response);
-                    System.out.println(distance);
-                    trip = new Trip(time, distance, car.getHwy(), car.getCity());
-                    Intent intent1 = new Intent(DestinationActivity.this, GastimatorActivity.class);
-                    intent1.putExtra("trip", trip);
-                    startActivity(intent1);
+                else{
+                    response = getDistance.googleMapsConnect(originString, destinationString);
+                    if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS") || response.contains("NOT_FOUND")){
+                        messageToast(DEFAULT);
+                    }
+                    else {
+                        messageToast(SUCCESS);
+                        timeHours = getDistance.parseTime(response, 1);
+                        timeMin = getDistance.parseTime(response, 2);
+                        String time = timeHours+" hour(s) and "+timeMin+" minutes";
+                        distance = getDistance.parseDistance(response);
+                        System.out.println(distance);
+                        trip = new Trip(time, distance, car.getHwy(), car.getCity());
+                        Intent intentNext = new Intent(DestinationActivity.this, GastimatorActivity.class);
+                        intentNext.putExtra("trip", trip);
+                        startActivity(intentNext);
+                    }
                 }
-
             }
         });
     }
@@ -88,12 +98,11 @@ public class DestinationActivity extends AppCompatActivity {
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
                 break;
             case DEFAULT:
-                Toast.makeText(this, "Please input values", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Origin and/or Destination not found", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
 }

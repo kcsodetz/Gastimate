@@ -7,4 +7,5 @@
     <string name="model">Model</string>
     <string name="make">Make</string>
     <string name="ok">OK</string>
+    <string name="originDestination">Enter an Origin and Destination</string>
 </resources>
