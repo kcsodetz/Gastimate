@@ -8,7 +8,7 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 /**
- * {insert meaningful descrition here}
+ * Gets the car info using the http request and given parameters
  *
  * @author Ken Sodetz
  * @since 9/30/2017
@@ -39,7 +39,8 @@ public class GetCarInfo{
         URLConnection connection;
         String url = "https://apis.solarialabs.com/shine/v1/vehicle-stats/specs?";
         try {
-            connection = new URL(url+"make="+make+"&model="+model+"&year="+year+"&apikey="+APIKEY).openConnection();
+            connection = new URL(url+"make="+make+"&model="+model+"&year="+year+"" +
+                    "&apikey="+APIKEY).openConnection();
             connection.setRequestProperty("Accept-Charset", charset);
             response = connection.getInputStream();
         } catch (IOException e) {
@@ -47,7 +48,7 @@ public class GetCarInfo{
         }
 
         try(Scanner scanner = new Scanner(response)) {
-                 return scanner.useDelimiter("\\A").next();
+            return scanner.useDelimiter("\\A").next();
         } catch (Exception e){
             System.err.println("Response is null");
             return "[]";

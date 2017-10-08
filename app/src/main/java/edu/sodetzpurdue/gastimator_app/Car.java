@@ -3,7 +3,9 @@ package edu.sodetzpurdue.gastimator_app;
 import java.io.Serializable;
 
 /**
- * Created by shiva on 10/1/2017.
+ * {insert meaningful descrition here}
+ * @author shiva
+ * @since 10/1/2017
  */
 
 public class Car implements Serializable{
