@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".AddVehicleActivity" />
         <activity android:name=".DestinationActivity" />
-        <activity android:name=".GastimatorActivity"></activity>
+        <activity android:name=".GastimatorActivity" />
     </application>
 
 </manifest>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gastimator-App</string>
+    <string name="app_name">Gastimate</string>
     <string name="city_mpg">City MPG:</string>
     <string name="highway_mpg">Highway MPG:</string>
     <string name="check_vehicle">Check Vehicle</string>
