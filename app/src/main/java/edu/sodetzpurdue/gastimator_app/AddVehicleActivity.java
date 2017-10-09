@@ -1,6 +1,7 @@
 package edu.sodetzpurdue.gastimator_app;
 
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,19 +21,19 @@ import android.widget.Toast;
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText makeText, modelText, yearText;
-    String make;
-    String model;
-    String yearString;
-    String response;
-    double hwy, city;
+    String make, model, yearString, response;
+    int year;
     Button okButton;
+    double hwy, city;
     public final int NO_MODEL = 0;
     public final int NO_MAKE = 1;
     public final int NO_YEAR = 2;
     public final int VEHICLE_DOES_NOT_EXIST = 3;
     public final int SUCCESS = 4;
-    GetCarInfo getCarInfo = new GetCarInfo();
+    public final int INVALID_YEAR = 5;
     Car newCar;
+    GetCarInfo getCarInfo = new GetCarInfo();
+    int yearCurrent = Calendar.getInstance().get(Calendar.YEAR);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         model = modelText.getText().toString();
                         make = make.trim();
                         yearString = yearText.getText().toString();
+                        year = Integer.parseInt(yearString);
                         if(make.equals("")) {
                             messageToast(NO_MAKE);
                         }
@@ -61,6 +63,9 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         }
                         else if(yearString.equals("")) {
                             messageToast(NO_YEAR);
+                        }
+                        else if(!(year >= 1885 && year <= yearCurrent+1)) {
+                            messageToast(INVALID_YEAR);
                         }
                         else{
                             response = getCarInfo.shineConnect(make, model, yearString);
@@ -98,9 +103,13 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "You did not enter a Year", Toast.LENGTH_SHORT).show();
                 break;
             case VEHICLE_DOES_NOT_EXIST:
-                Toast.makeText(this, "The vehicle "+make+" "+model+" "+yearString+" does not exist" +
-                                "or cannot be found.",
+                Toast.makeText(this, "The vehicle "+make+" "+model+" "+yearString+" does not " +
+                                "exist or cannot be found.",
                         Toast.LENGTH_SHORT).show();
+                break;
+            case INVALID_YEAR:
+                Toast.makeText(this, "Invalid Year, must be between 1885 and " + (yearCurrent+1),
+                        Toast.LENGTH_LONG).show();
                 break;
             case SUCCESS:
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
