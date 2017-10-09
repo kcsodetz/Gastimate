@@ -103,6 +103,9 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         );
     }
 
+    /**
+     * Method to execute after thread has completed
+     */
     public void postResponseSet() {
         if (response.equals("[]")){ //vehicle does not exist or connection issue
             progressBar.setVisibility(View.GONE);

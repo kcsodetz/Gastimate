@@ -10,7 +10,8 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 /**
- * Gets the car info using the http request and given parameters
+ * Gets the car info using Liberty Mutual's Shine API to create an http request and given
+ * parameters
  *
  * @author Ken Sodetz
  * @since 9/30/2017
@@ -20,7 +21,6 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
 
     //AsyncResponse interface field
     public AsyncResponse delegate = null;
-    ProgressBar progressBar;
 
     private final String APIKEY = "A8874x8oBWR0GdYXGccI2tYFFULXur7a";
 
@@ -30,26 +30,33 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
     public GetCarInfo() {
     }
 
-
+    /**
+     * Starts the background thread
+     * @param strings parameters for the request
+     * @return result of the request
+     */
     @Override
     protected String doInBackground(String... strings) {
         return shineConnect(strings[0], strings[1], strings[2]);
     }
 
+    /**
+     * Pass the result to the main activity once the thread has completed
+     * @param result result of the HTTP get request
+     */
     @Override
     protected void onPostExecute(String result){
         delegate.processFinish(result);
     }
 
     /**
-     * Sends the HTML request to get the vehicle data based on given parameters
+     * Sends the HTTP request to get the vehicle data based on given parameters
      * @param make, make of the vehicle
      * @param model, model of the vehicle
      * @param year, year of the vehicle
      * @return responseBody, string response of the API call
      */
-    public String shineConnect (String make, String model, String year)
-    {
+    public String shineConnect (String make, String model, String year) {
         String charset = "UTF-8";
         InputStream response = null;
         URLConnection connection;
@@ -71,14 +78,12 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
         }
     }
 
-
     /**
      * Parses City MPG from api call
      * @param apiCallString api string to be parsed
      * @return city mpg as a double
      */
-    public double getCityMPG(String apiCallString)
-    {
+    public double getCityMPG(String apiCallString) {
         String response = apiCallString.substring(apiCallString.indexOf("City_Unadj_Conventional_Fuel"), apiCallString.indexOf("Hwy_Unadj_Conventional_Fuel"));
         response = response.substring(response.indexOf(":") + 1, response.indexOf(","));
         return Double.parseDouble(response);
@@ -89,8 +94,7 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
      * @param apiCallString api string to be parsed
      * @return highway mpg as a double
      */
-    public double getHighwayMPG(String apiCallString)
-    {
+    public double getHighwayMPG(String apiCallString) {
         String response = apiCallString.substring(apiCallString.indexOf("Hwy_Unadj_Conventional_Fuel"), apiCallString.indexOf("Air_AspirMethod"));
         response = response.substring(response.indexOf(":") + 1, response.indexOf(","));
         return Double.parseDouble(response);
