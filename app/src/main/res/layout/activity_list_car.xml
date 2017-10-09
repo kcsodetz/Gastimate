@@ -21,8 +21,10 @@
 
     <ListView
         android:id="@id/listView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:cacheColorHint="@color/colorPrimaryDark"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:clickable="true" />
 
 </android.support.design.widget.CoordinatorLayout>
