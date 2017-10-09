@@ -1,6 +1,8 @@
 package edu.sodetzpurdue.gastimator_app;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ public class VehicleListActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE) ;
         final SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
         final SharedPreferences.Editor prefsEditor = mPrefs.edit();
         final Gson gson = new Gson();
@@ -69,6 +72,7 @@ public class VehicleListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long arg3) {
+                vibrator.vibrate(50);
                 prefsEditor.remove(parent.getItemAtPosition(position).toString());
                 prefsEditor.commit();
                 carList.remove(removeElement(parent.getItemAtPosition(position).toString(), carList));

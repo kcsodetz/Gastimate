@@ -13,17 +13,17 @@ import android.widget.Toast;
 
 public class DestinationActivity extends AppCompatActivity {
 
-    private EditText origin, destination;
-    Button gastimateBtn;
+    EditText origin, destination;
+    Button gastimateButtton;
     String originString;
     String destinationString;
     String response;
     Trip trip;
-    public final int NO_ORIGIN = 0;
-    public final int NO_DESTINATION = 1;
-    public final int SUCCESS = 2;
-    public final int DEFAULT = 3;
-    public final int NO_CONNECTION = 4;
+    private final int NO_ORIGIN = 0;
+    private final int NO_DESTINATION = 1;
+    private final int SUCCESS = 2;
+    private final int DEFAULT = 3;
+    private final int NO_CONNECTION = 4;
     int timeHours, timeMin;
     double distance;
     GetDistance getDistance = new GetDistance();
@@ -41,19 +41,19 @@ public class DestinationActivity extends AppCompatActivity {
         this.setTitle(getString(R.string.originDestination));
         final Intent intent = getIntent();
         final Car car = (Car)intent.getSerializableExtra("car");
-//        System.out.println("Highway: " +car.getHwy());
-        gastimateBtn = (Button)findViewById(R.id.gastimateButton);
-        gastimateBtn.setOnClickListener(new View.OnClickListener() {
+        gastimateButtton = (Button)findViewById(R.id.gastimateButton);
+        gastimateButtton.setOnClickListener(new View.OnClickListener() {
             /**
              * onClick method
              * @param view current view
              */
             @Override
             public void onClick(View view) {
-                origin = (EditText)findViewById(R.id.editText);
-                destination = (EditText)findViewById(R.id.editText2);
+                origin = (EditText)findViewById(R.id.originText);
+                destination = (EditText)findViewById(R.id.destinationText);
                 originString = origin.getText().toString();
                 destinationString = destination.getText().toString();
+
                 if(originString.equals("")) {
                     messageToast(NO_ORIGIN);
                 }
@@ -65,7 +65,8 @@ public class DestinationActivity extends AppCompatActivity {
                 }
                 else{
                     response = getDistance.googleMapsConnect(originString, destinationString);
-                    if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS") || response.contains("NOT_FOUND")){
+                    if(response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS") ||
+                            response.contains("NOT_FOUND")){
                         messageToast(DEFAULT);
                     }
                     else if (response.equals("EMPTY")){

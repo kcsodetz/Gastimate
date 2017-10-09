@@ -22,8 +22,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
 
     EditText makeText, modelText, yearText;
     String make, model, yearString, response;
-    int year;
     Button okButton;
+    int year;
     double hwy, city;
     public final int NO_MODEL = 0;
     public final int NO_MAKE = 1;
@@ -35,6 +35,10 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     GetCarInfo getCarInfo = new GetCarInfo();
     int yearCurrent = Calendar.getInstance().get(Calendar.YEAR);
 
+    /**
+     * onCreate Method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,29 +59,31 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         make = make.trim();
                         yearString = yearText.getText().toString();
                         year = Integer.parseInt(yearString);
-                        if(make.equals("")) {
+
+                        if(make.equals("")) { //check if make is empty
                             messageToast(NO_MAKE);
                         }
-                        else if(model.equals("")) {
+                        else if(model.equals("")) { //check if model is empty
                             messageToast(NO_MODEL);
                         }
-                        else if(yearString.equals("")) {
+                        else if(yearString.equals("")) { //check if year is empty
                             messageToast(NO_YEAR);
                         }
-                        else if(!(year >= 1885 && year <= yearCurrent+1)) {
+                        else if(!(year >= 1885 && year <= yearCurrent+1)) { //check for valid year
                             messageToast(INVALID_YEAR);
                         }
-                        else{
+                        else{ //no inputs were invalid or empty
                             response = getCarInfo.shineConnect(make, model, yearString);
-                            if (response.equals("[]")){
+                            if (response.equals("[]")){ //vehicle does not exist or connection issue
                                 messageToast(VEHICLE_DOES_NOT_EXIST);
                             }
-                            else {
+                            else { //vehicle found
                                 messageToast(SUCCESS);
                                 hwy = getCarInfo.getHighwayMPG(response);
                                 city = getCarInfo.getCityMPG(response);
                                 newCar = new Car(make,model,yearString, hwy, city);
-                                Intent intent = new Intent(AddVehicleActivity.this, VehicleListActivity.class);
+                                Intent intent = new Intent(AddVehicleActivity.this,
+                                        VehicleListActivity.class);
                                 intent.putExtra("car", newCar);
                                 startActivity(intent);
                             }
@@ -122,11 +128,10 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
 
     /**
      * On Click handler
-     * @param view view to switch
+     * @param view view
      */
     @Override
     public void onClick(View view) {
-
     }
 
     /**
