@@ -2,7 +2,6 @@ package edu.sodetzpurdue.gastimator_app;
 
 import android.content.Intent;
 import android.icu.util.Calendar;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
@@ -18,11 +18,16 @@ import android.widget.Toast;
  * @author Ken Sodetz
  * @since 9/30/17
  */
-public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener,
+        AsyncResponse{
+
+
+    GetCarInfo getCarInfo = new GetCarInfo();
 
     EditText makeText, modelText, yearText;
     String make, model, yearString, response;
     Button okButton;
+    ProgressBar progressBar;
     int year;
     double hwy, city;
     public final int NO_MODEL = 0;
@@ -32,8 +37,18 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public final int SUCCESS = 4;
     public final int INVALID_YEAR = 5;
     Car newCar;
-    GetCarInfo getCarInfo = new GetCarInfo();
     int yearCurrent = Calendar.getInstance().get(Calendar.YEAR);
+
+    /**
+     * Override method to get the result of getCarInfo
+     * @param output the result from getCarInfo
+     */
+    @Override
+    public void processFinish(String output) {
+        progressBar.setVisibility(View.GONE);
+        response = output;
+        postResponseSet();
+    }
 
     /**
      * onCreate Method
@@ -43,14 +58,19 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vehicle);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
         this.setTitle("Add a Vehicle");
+        progressBar = (ProgressBar)findViewById(R.id.progressBarAddVehicle);
+
+        final AsyncResponse localDelegate = this;
+
+//        getCarInfo.delegate = this;
+
         okButton = (Button)findViewById(R.id.okButton);
         okButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        progressBar.setVisibility(View.VISIBLE);
                         makeText = (EditText)findViewById(R.id.makeText);
                         modelText = (EditText)findViewById(R.id.modelText);
                         yearText = (EditText)findViewById(R.id.yearText);
@@ -58,8 +78,9 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         model = modelText.getText().toString();
                         make = make.trim();
                         yearString = yearText.getText().toString();
-                        year = Integer.parseInt(yearString);
-
+                        if(!yearString.equals("")){
+                            year = Integer.parseInt(yearString);
+                        }
                         if(make.equals("")) { //check if make is empty
                             messageToast(NO_MAKE);
                         }
@@ -72,32 +93,40 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         else if(!(year >= 1885 && year <= yearCurrent+1)) { //check for valid year
                             messageToast(INVALID_YEAR);
                         }
-                        else{ //no inputs were invalid or empty
-                            response = getCarInfo.shineConnect(make, model, yearString);
-                            if (response.equals("[]")){ //vehicle does not exist or connection issue
-                                messageToast(VEHICLE_DOES_NOT_EXIST);
-                            }
-                            else { //vehicle found
-                                messageToast(SUCCESS);
-                                hwy = getCarInfo.getHighwayMPG(response);
-                                city = getCarInfo.getCityMPG(response);
-                                newCar = new Car(make,model,yearString, hwy, city);
-                                Intent intent = new Intent(AddVehicleActivity.this,
-                                        VehicleListActivity.class);
-                                intent.putExtra("car", newCar);
-                                startActivity(intent);
-                            }
+                        else{ //no inputs were invalid
+                            getCarInfo = new GetCarInfo();
+                            getCarInfo.delegate = localDelegate;
+                            getCarInfo.execute(make, model, yearString);
                         }
                     }
                 }
         );
     }
 
+    public void postResponseSet() {
+        if (response.equals("[]")){ //vehicle does not exist or connection issue
+            progressBar.setVisibility(View.GONE);
+            messageToast(VEHICLE_DOES_NOT_EXIST);
+        }
+        else { //vehicle found
+            messageToast(SUCCESS);
+            hwy = getCarInfo.getHighwayMPG(response);
+            city = getCarInfo.getCityMPG(response);
+            newCar = new Car(make,model,yearString, hwy, city);
+            Intent intent = new Intent(AddVehicleActivity.this,
+                    VehicleListActivity.class);
+            intent.putExtra("car", newCar);
+            startActivity(intent);
+        }
+    }
+
+
     /**
      * Handles toasts for missing inputs
      * @param input missing input
      */
     public void messageToast(int input){
+        progressBar.setVisibility(View.GONE);
         switch (input){
             case NO_MAKE:
                 Toast.makeText(this, "You did not enter a Make", Toast.LENGTH_SHORT).show();
@@ -158,4 +187,5 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 return true;
         }
     }
+
 }

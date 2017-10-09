@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class DestinationActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class DestinationActivity extends AppCompatActivity {
     String destinationString;
     String response;
     Trip trip;
+    ProgressBar progressBar;
     private final int NO_ORIGIN = 0;
     private final int NO_DESTINATION = 1;
     private final int SUCCESS = 2;
@@ -38,6 +40,7 @@ public class DestinationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_destination);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        progressBar = (ProgressBar)findViewById(R.id.progressBarDestination);
         this.setTitle(getString(R.string.originDestination));
         final Intent intent = getIntent();
         final Car car = (Car)intent.getSerializableExtra("car");
@@ -49,6 +52,7 @@ public class DestinationActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 origin = (EditText)findViewById(R.id.originText);
                 destination = (EditText)findViewById(R.id.destinationText);
                 originString = origin.getText().toString();

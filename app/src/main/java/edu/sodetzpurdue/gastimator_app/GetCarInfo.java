@@ -1,5 +1,7 @@
 package edu.sodetzpurdue.gastimator_app;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,15 +16,29 @@ import java.util.Scanner;
  * @since 9/30/2017
  */
 
-public class GetCarInfo{
+public class GetCarInfo extends AsyncTask<String, Void, String>{
+
+    //AsyncResponse interface field
+    public AsyncResponse delegate = null;
+    ProgressBar progressBar;
 
     private final String APIKEY = "A8874x8oBWR0GdYXGccI2tYFFULXur7a";
 
     /**
      * Default Constructor
      */
-    public GetCarInfo(){
+    public GetCarInfo() {
+    }
 
+
+    @Override
+    protected String doInBackground(String... strings) {
+        return shineConnect(strings[0], strings[1], strings[2]);
+    }
+
+    @Override
+    protected void onPostExecute(String result){
+        delegate.processFinish(result);
     }
 
     /**
