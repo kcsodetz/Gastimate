@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class VehicleListActivity extends AppCompatActivity {
-
-    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +24,18 @@ public class VehicleListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_car);
         this.setTitle("Choose or Add a Vehicle");
-        lv = (ListView) findViewById(R.id.listView);
+        ListView lv = (ListView) findViewById(R.id.listView);
         final Intent intent = getIntent();
         if (intent.hasExtra("car")){
             Car car = (Car)intent.getSerializableExtra("car");
             System.out.println(car.getModel());
             String json = gson.toJson(car);
-            prefsEditor.putString(car.getModel(), json);
+            prefsEditor.putString(car.getYear()+" "+car.getMake() + " " + car.getModel(), json);
             prefsEditor.apply();
         }
+
         final List<String> carList = new ArrayList<>();
         final Map<String,?> keys = mPrefs.getAll();
-
         for(Map.Entry<String,?> entry : keys.entrySet()){
             carList.add(entry.getKey());
         }
@@ -46,15 +46,16 @@ public class VehicleListActivity extends AppCompatActivity {
 
         lv.setAdapter(arrayAdapter);
 
+        //make click listener
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){
-                Intent intent1 = new Intent(VehicleListActivity.this, DestinationActivity.class);
+                Intent intentNext = new Intent(VehicleListActivity.this, DestinationActivity.class);
                 String key = (String) adapter.getAdapter().getItem(position);
                 String json = mPrefs.getString(key, "");
                 Car car = gson.fromJson(json, Car.class);
-                intent1.putExtra("car", car);
-                startActivity(intent1);
+                intentNext.putExtra("car", car);
+                startActivity(intentNext);
             }
         }
 
@@ -69,9 +70,9 @@ public class VehicleListActivity extends AppCompatActivity {
                 prefsEditor.commit();
                 carList.remove(removeElement(parent.getItemAtPosition(position).toString(), carList));
                 arrayAdapter.notifyDataSetChanged();
+                toastMessage();
                 return true;
             }
-
         });
     }
 
@@ -81,8 +82,7 @@ public class VehicleListActivity extends AppCompatActivity {
      * @param items list to remove from
      * @return -1 if unsuccessful
      */
-    public static int removeElement(String element, List<String> items)
-    {
+    public static int removeElement(String element, List<String> items) {
         for(int i = 0; i < items.size(); i++)
         {
             if(items.get(i).equals(element))
@@ -98,5 +98,9 @@ public class VehicleListActivity extends AppCompatActivity {
     public void pressedFAB(View view){
         Intent intent = new Intent(this, AddVehicleActivity.class);
         startActivity(intent);
+    }
+
+    private void toastMessage(){
+        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
     }
 }

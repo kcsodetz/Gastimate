@@ -39,7 +39,7 @@ public class DestinationActivity extends AppCompatActivity {
         this.setTitle(getString(R.string.originDestination));
         final Intent intent = getIntent();
         final Car car = (Car)intent.getSerializableExtra("car");
-        System.out.println("Highway: " +car.getHwy());
+//        System.out.println("Highway: " +car.getHwy());
         gastimateBtn = (Button)findViewById(R.id.gastimateButton);
         gastimateBtn.setOnClickListener(new View.OnClickListener() {
             /**
