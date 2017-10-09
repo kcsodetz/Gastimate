@@ -16,6 +16,10 @@ import java.util.Map;
 
 public class VehicleListActivity extends AppCompatActivity {
 
+    /**
+     * onCreate Method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
@@ -46,7 +50,6 @@ public class VehicleListActivity extends AppCompatActivity {
 
         lv.setAdapter(arrayAdapter);
 
-        //make click listener
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){

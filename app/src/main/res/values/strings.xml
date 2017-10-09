@@ -9,4 +9,6 @@
     <string name="ok">OK</string>
     <string name="originDestination">Enter an Origin and Destination</string>
     <string name="internetConnection">You don\'t seem to be connected to the internet. Check your connection and try again.</string>
+    <string name="home_action">home_action</string>
+    <string name="back_to_list">Back to List</string>
 </resources>

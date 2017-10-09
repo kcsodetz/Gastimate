@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -119,7 +120,28 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        getMenuInflater().inflate(R);
-//    }
+    /**
+     * Create and inflate local menu
+     * @param menu menu to be inflated
+     * @return true
+     */
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * The onOptionsItemSelected method gets the selected item from the spinner
+     * @param item if the menu item selected, of type MenuItem
+     * @return true
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home_action:
+                startActivity(new Intent(this, VehicleListActivity.class));
+                return true;
+            default:
+                return true;
+        }
+    }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:compat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_action"
+        android:title="@string/back_to_list"
+        android:icon="@mipmap/ic_home_white_24dp"
+        compat:showAsAction="always"
+        />
+</menu>

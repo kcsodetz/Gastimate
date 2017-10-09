@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class GastimatorActivity extends AppCompatActivity {
     TextView gasText, timeText, messageText, costText;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +34,10 @@ public class GastimatorActivity extends AppCompatActivity {
         double HighwayMPG = trip.getCarHighwayMPG();
         String time = trip.getTime();
 
-
-        if(distance>40)
-        {
+        if(distance > 40) {
             gasReq = distance/CityMPG;
         }
-        else
-        {
+        else {
             gasReq = distance/HighwayMPG;
         }
 
@@ -42,14 +45,36 @@ public class GastimatorActivity extends AppCompatActivity {
 
         String distanceString = "This trip is " + distance + " miles! Stay safe and fuel up!";
         String gasString = String.format("%.2f Gallons",gasReq);
-        String timeString = time;
         String costString = String.format("$ %.2f",cost);
-
+        //gasString = gasString + " at " + ;
         gasText.setText(gasString);
-        timeText.setText(timeString);
+        timeText.setText(time);
         messageText.setText(distanceString);
         costText.setText(costString);
+    }
 
+    /**
+     * Create and inflate local menu
+     * @param menu menu to be inflated
+     * @return true
+     */
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    /**
+     * The onOptionsItemSelected method gets the selected item from the spinner
+     * @param item if the menu item selected, of type MenuItem
+     * @return true
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home_action:
+                startActivity(new Intent(this, VehicleListActivity.class));
+                return true;
+            default:
+                return true;
+        }
     }
 }
