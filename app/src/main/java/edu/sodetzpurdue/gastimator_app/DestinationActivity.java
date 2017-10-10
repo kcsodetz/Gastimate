@@ -73,6 +73,7 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
+                gastimateButtton.setEnabled(false);
                 origin = (EditText)findViewById(R.id.originText);
                 destination = (EditText)findViewById(R.id.destinationText);
                 originString = origin.getText().toString();
@@ -125,6 +126,7 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
      */
     public void messageToast(int input){
         progressBar.setVisibility(View.GONE);
+        gastimateButtton.setEnabled(true);
         switch (input){
             case NO_ORIGIN:
                 Toast.makeText(this, "You did not enter an Origin", Toast.LENGTH_SHORT).show();

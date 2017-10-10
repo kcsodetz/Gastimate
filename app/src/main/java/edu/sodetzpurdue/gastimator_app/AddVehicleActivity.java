@@ -71,6 +71,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onClick(View view) {
                         progressBar.setVisibility(View.VISIBLE);
+                        okButton.setEnabled(false);
                         makeText = (EditText)findViewById(R.id.makeText);
                         modelText = (EditText)findViewById(R.id.modelText);
                         yearText = (EditText)findViewById(R.id.yearText);
@@ -130,6 +131,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
      */
     public void messageToast(int input){
         progressBar.setVisibility(View.GONE);
+        okButton.setEnabled(true);
         switch (input){
             case NO_MAKE:
                 Toast.makeText(this, "You did not enter a Make", Toast.LENGTH_SHORT).show();
