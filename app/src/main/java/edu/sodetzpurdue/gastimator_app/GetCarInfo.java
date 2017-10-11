@@ -56,6 +56,7 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
      * @param year, year of the vehicle
      * @return responseBody, string response of the API call
      */
+    @SuppressWarnings("nullable")
     public String shineConnect (String make, String model, String year) {
         String charset = "UTF-8";
         InputStream response = null;
@@ -84,7 +85,8 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
      * @return city mpg as a double
      */
     public double getCityMPG(String apiCallString) {
-        String response = apiCallString.substring(apiCallString.indexOf("City_Unadj_Conventional_Fuel"), apiCallString.indexOf("Hwy_Unadj_Conventional_Fuel"));
+        String response = apiCallString.substring(apiCallString.indexOf("City_Unadj_" +
+                "Conventional_Fuel"), apiCallString.indexOf("Hwy_Unadj_Conventional_Fuel"));
         response = response.substring(response.indexOf(":") + 1, response.indexOf(","));
         return Double.parseDouble(response);
     }
@@ -95,7 +97,8 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
      * @return highway mpg as a double
      */
     public double getHighwayMPG(String apiCallString) {
-        String response = apiCallString.substring(apiCallString.indexOf("Hwy_Unadj_Conventional_Fuel"), apiCallString.indexOf("Air_AspirMethod"));
+        String response = apiCallString.substring(apiCallString.indexOf("Hwy_Unadj" +
+                "_Conventional_Fuel"), apiCallString.indexOf("Air_AspirMethod"));
         response = response.substring(response.indexOf(":") + 1, response.indexOf(","));
         return Double.parseDouble(response);
     }

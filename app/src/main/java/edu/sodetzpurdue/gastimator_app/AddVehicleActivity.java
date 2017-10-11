@@ -44,10 +44,15 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
      * @param output the result from getCarInfo
      */
     @Override
-    public void processFinish(String output) {
+    public void processFinish(Object output) {
         progressBar.setVisibility(View.GONE);
-        response = output;
+        response = (String)output;
         postResponseSet();
+    }
+
+   //@Override
+    public void processFinishDouble(Double[] output) {
+        //does nothing
     }
 
     /**
@@ -192,5 +197,4 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 return true;
         }
     }
-
 }

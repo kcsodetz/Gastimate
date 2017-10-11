@@ -42,10 +42,19 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
      * @param output the result from getDistance
      */
     @Override
-    public void processFinish(String output) {
+    public void processFinish(Object output) {
         progressBar.setVisibility(View.GONE);
-        response = output;
+        response = (String)output;
         postResponseSet();
+    }
+
+    /**
+     * Part of AsyncResponse interface, not needed for this particular function
+     * @param output output of possible double[]
+     */
+   // @Override
+    public void processFinishDouble(Double[] output) {
+        //does nothing
     }
 
     /**
@@ -85,14 +94,14 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
                 else if(destinationString.equals("")) { //destination empty
                     messageToast(NO_DESTINATION);
                 }
-                else if(destinationString.length() < 5 || originString.length() < 5){ //too short
+                else if(destinationString.length() < 5 || originString.length() < 5) { //too short
                     messageToast(DEFAULT);
                 }
-                else{ //fits constraints
+                else { //fits constraints
                     getDistance = new GetDistance();
                     getDistance.delegate = localDelegate;
                     getDistance.execute(originString, destinationString);
-                    }
+                }
             }
         });
     }
@@ -103,7 +112,7 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
     public void postResponseSet() {
         if (response.contains("INVALID_REQUEST") || response.contains("ZERO_RESULTS") ||
                 response.contains("NOT_FOUND")) { //destination does not exist
-            messageToast(DEFAULT);
+             messageToast(DEFAULT);
         } else if (response.equals("EMPTY")) { //there is no connection to the internet
             messageToast(NO_CONNECTION);
         } else { //destination found

@@ -8,5 +8,7 @@ package edu.sodetzpurdue.gastimator_app;
  */
 
 public interface AsyncResponse {
-    void processFinish(String output);
+    //void processFinish(String output);
+    //void processFinishDouble(Double[] output);
+    void processFinish(Object output);
 }
