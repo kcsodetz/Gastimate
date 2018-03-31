@@ -34,7 +34,7 @@ $ git clone https://github.com/kcsodetz/Gastimate.git
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE.md for details
+This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/kcsodetz/Gastimate/blob/master/LICENSE.md) for details
 
 ## Devpost
 
