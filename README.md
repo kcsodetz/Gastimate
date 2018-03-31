@@ -16,7 +16,7 @@ This application requires minimum **API 24: Android 7.0 (Nougat)** to run and is
 The easiest way to get a developer copy of this application is to clone the repository:
 
 ```
-git clone https://github.com/kcsodetz/Gastimate.git
+$ git clone https://github.com/kcsodetz/Gastimate.git
 ```
 
 ## Built With
