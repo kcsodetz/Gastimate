@@ -1,6 +1,6 @@
 # Gastimate
 
-An Android application that can estimate the amount of fuel consumed on a trip, based on the Make, Model, and Year of a vehicle, and the distance travelled between two points.
+An Android application that can estimate the amount of fuel consumed on a trip, based on the Make, Model, and Year of a vehicle, and the distance traveled between two points.
 Created for Purdue University's Boilermake V Hackathon. Winner of Liberty Mutual's Sponsor Prize.
 
 ## Getting Started
