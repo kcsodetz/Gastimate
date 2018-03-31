@@ -1,14 +1,18 @@
 package edu.sodetzpurdue.gastimator_app;
 
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Main Activity
+ *
+ * @author Ken Sodetz
+ * @since 9/30/2017
+ */
 public class GastimatorActivity extends AppCompatActivity {
     TextView gasText, timeText, messageText, costText;
 
@@ -35,17 +39,16 @@ public class GastimatorActivity extends AppCompatActivity {
         String time = trip.getTime();
 
         if(distance > 40) {
-            gasReq = distance/CityMPG;
-        }
-        else {
-            gasReq = distance/HighwayMPG;
+            gasReq = distance / CityMPG;
+        } else {
+            gasReq = distance / HighwayMPG;
         }
 
         double cost = 2.51 * gasReq;
 
         String distanceString = "This trip is " + distance + " miles! Stay safe and fuel up!";
-        String gasString = String.format("%.2f Gallons",gasReq);
-        String costString = String.format("$ %.2f",cost);
+        String gasString = String.format("%.2f Gallons", gasReq);
+        String costString = String.format("$ %.2f", cost);
         gasText.setText(gasString);
         timeText.setText(time);
         messageText.setText(distanceString);
@@ -57,7 +60,7 @@ public class GastimatorActivity extends AppCompatActivity {
      * @param menu menu to be inflated
      * @return true
      */
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }

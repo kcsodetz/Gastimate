@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 /**
  * Trip object
- * @author stefanygo, Ken Sodetz
+ *
+ * @author Stefany Go
+ * @author Ken Sodetz
  * @since 10/1/17
  */
 
-public class Trip implements Serializable{
+public class Trip implements Serializable {
     private String time;
     private double distance, carHighwayMPG, carCityMPG;
 

@@ -1,7 +1,6 @@
 package edu.sodetzpurdue.gastimator_app;
 
 import android.os.AsyncTask;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -15,7 +14,7 @@ import java.util.Scanner;
  * @since 10/10/2017
  */
 
-public class GetNationalAverage extends AsyncTask<Void, Void, Double[]>{
+public class GetNationalAverage extends AsyncTask<Void, Void, Double[]> {
 
     private double diesel, regular, premium, midgrade, electric, e85;
 
@@ -71,17 +70,23 @@ public class GetNationalAverage extends AsyncTask<Void, Void, Double[]>{
      */
     private Double[] parseNatlAvg(String response) {
         Double[] collection = new Double[6];
-        diesel = Double.parseDouble(response.substring(response.indexOf("diesel")+7, response.indexOf("</diesel>")));
+        diesel = Double.parseDouble(response.substring(response.indexOf("diesel") + 7,
+                response.indexOf("</diesel>")));
         collection[0] = diesel;
-        e85 = Double.parseDouble(response.substring(response.indexOf("e85")+4, response.indexOf("</e85>")));
+        e85 = Double.parseDouble(response.substring(response.indexOf("e85") + 4,
+                response.indexOf("</e85>")));
         collection[1] = e85;
-        electric = Double.parseDouble(response.substring(response.indexOf("electric")+9, response.indexOf("</electric>")));
+        electric = Double.parseDouble(response.substring(response.indexOf("electric") + 9,
+                response.indexOf("</electric>")));
         collection[2] = electric;
-        midgrade = Double.parseDouble(response.substring(response.indexOf("midgrade")+9, response.indexOf("</midgrade>")));
+        midgrade = Double.parseDouble(response.substring(response.indexOf("midgrade") + 9,
+                response.indexOf("</midgrade>")));
         collection[3] = midgrade;
-        regular = Double.parseDouble(response.substring(response.indexOf("regular")+8, response.indexOf("</regular>")));
+        regular = Double.parseDouble(response.substring(response.indexOf("regular") + 8,
+                response.indexOf("</regular>")));
         collection[4] = regular;
-        premium = Double.parseDouble(response.substring(response.indexOf("premium")+8, response.indexOf("</premium>")));
+        premium = Double.parseDouble(response.substring(response.indexOf("premium") + 8,
+                response.indexOf("</premium>")));
         collection[5] = premium;
         return collection;
     }

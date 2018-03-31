@@ -1,4 +1,5 @@
 package edu.sodetzpurdue.gastimator_app;
+
 import android.os.AsyncTask;
 
 import java.io.IOException;
@@ -8,17 +9,18 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 /**
- * Gets the distance of the trip using G
+ * Gets the distance of the trip using the Google Maps API
  *
+ * @author Shiv Paul
  * @author Ken Sodetz
  * @since 9/30/2017
  */
 
-public class GetDistance  extends AsyncTask<String, Void, String>{
-
+public class GetDistance  extends AsyncTask<String, Void, String> {
     //AsyncResponse interface field
     public AsyncResponse delegate = null;
 
+    // TODO: Change to internal file
     public final String APIKEY = "AIzaSyD7GjH80EBchoi53fNvVRWGhBrWaPGP_iw";
 
     /**
@@ -58,19 +60,18 @@ public class GetDistance  extends AsyncTask<String, Void, String>{
         String link = "https://maps.googleapis" +
                 ".com/maps/api/distancematrix/json?units=imperial&";
         try {
-            connection = new URL(link+"origins="+origin+"&destinations="+dest+"&key="+APIKEY).openConnection();
+            connection = new URL(link + "origins=" + origin + "&destinations=" + dest + "&key=" +
+                    APIKEY).openConnection();
             response = connection.getInputStream();
-        }
-        catch (IOException io) {
+        } catch (IOException io) {
             io.printStackTrace();
         }
         try(Scanner scanner = new Scanner(response)) {
             return scanner.useDelimiter("\\A").next();
-        } catch (Exception e){
+        } catch (Exception e) {
             return "EMPTY";
         }
     }
-
 
     /**
      * Parses the distance given by Google's API
@@ -78,8 +79,9 @@ public class GetDistance  extends AsyncTask<String, Void, String>{
      * @return parsed, double containing number of miles between points
      */
     public double parseDistance(String APIReturn) {
-        String distance = APIReturn.substring(APIReturn.indexOf("distance")+42, APIReturn.indexOf(" mi"));
-        distance = distance.replace(",","");
+        String distance = APIReturn.substring(APIReturn.indexOf("distance") + 42,
+                APIReturn.indexOf(" mi"));
+        distance = distance.replace(",", "");
         return Double.parseDouble(distance);
     }
 
@@ -90,27 +92,26 @@ public class GetDistance  extends AsyncTask<String, Void, String>{
      * @return parsed, double containing total time needed for travel
      */
     public int parseTime(String APIReturn, int hm) {
-        String time0 = APIReturn.substring(APIReturn.lastIndexOf("duration"), APIReturn.lastIndexOf("status"));
-        String time1 = time0.substring(time0.lastIndexOf("value")+9, time0.length());
-        String time ="";
-        for(int i=0; i<time1.length(); i++){
-            if (time1.charAt(i)<='9' && time1.charAt(i)>='0'){
-                time+=time1.charAt(i);
+        String time0 = APIReturn.substring(APIReturn.lastIndexOf("duration"),
+                APIReturn.lastIndexOf("status"));
+        String time1 = time0.substring(time0.lastIndexOf("value") + 9, time0.length());
+        String time = "";
+        for (int i = 0; i < time1.length(); i++) {
+            if (time1.charAt(i) <= '9' && time1.charAt(i) >= '0') {
+                time += time1.charAt(i);
             }
         }
 
         int seconds = Integer.parseInt(time);
-        int minutes = seconds/60;
-        int hours = minutes/60;
-        minutes = minutes - hours*60;
+        int minutes = seconds / 60;
+        int hours = minutes / 60;
+        minutes = minutes - hours * 60;
 
-        if(hm == 1) {
+        if (hm == 1) {
             return hours;
-        }
-        else if(hm == 2) {
+        } else if (hm == 2) {
             return minutes;
-        }
-        else {
+        } else {
             return 0;
         }
     }

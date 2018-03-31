@@ -17,7 +17,7 @@ import android.widget.Toast;
  * @author Ken Sodetz
  * @since 9/30/17
  */
-public class DestinationActivity extends AppCompatActivity implements AsyncResponse{
+public class DestinationActivity extends AppCompatActivity implements AsyncResponse {
 
     EditText origin, destination;
     Button gastimateButtton;
@@ -133,10 +133,10 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
      * Handles toasts for missing inputs
      * @param input missing input
      */
-    public void messageToast(int input){
+    public void messageToast(int input) {
         progressBar.setVisibility(View.GONE);
         gastimateButtton.setEnabled(true);
-        switch (input){
+        switch (input) {
             case NO_ORIGIN:
                 Toast.makeText(this, "You did not enter an Origin", Toast.LENGTH_SHORT).show();
                 break;
@@ -163,7 +163,7 @@ public class DestinationActivity extends AppCompatActivity implements AsyncRespo
      * @param menu menu to be inflated
      * @return true
      */
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }

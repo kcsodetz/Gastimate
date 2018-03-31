@@ -19,8 +19,7 @@ import android.widget.Toast;
  * @since 9/30/17
  */
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener,
-        AsyncResponse{
-
+        AsyncResponse {
 
     GetCarInfo getCarInfo = new GetCarInfo();
 
@@ -96,7 +95,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                         else if(yearString.equals("")) { //check if year is empty
                             messageToast(NO_YEAR);
                         }
-                        else if(!(year >= 1885 && year <= yearCurrent+1)) { //check for valid year
+                        else if(!(year >= 1885 && year <= yearCurrent + 1)) { //check for valid year
                             messageToast(INVALID_YEAR);
                         }
                         else{ //no inputs were invalid
@@ -113,31 +112,28 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
      * Method to execute after thread has completed
      */
     public void postResponseSet() {
-        if (response.equals("[]")){ //vehicle does not exist or connection issue
+        if (response.equals("[]")) { //vehicle does not exist or connection issue
             progressBar.setVisibility(View.GONE);
             messageToast(VEHICLE_DOES_NOT_EXIST);
-        }
-        else { //vehicle found
+        } else { //vehicle found
             messageToast(SUCCESS);
             hwy = getCarInfo.getHighwayMPG(response);
             city = getCarInfo.getCityMPG(response);
             newCar = new Car(make,model,yearString, hwy, city);
-            Intent intent = new Intent(AddVehicleActivity.this,
-                    VehicleListActivity.class);
+            Intent intent = new Intent(AddVehicleActivity.this, VehicleListActivity.class);
             intent.putExtra("car", newCar);
             startActivity(intent);
         }
     }
 
-
     /**
      * Handles toasts for missing inputs
      * @param input missing input
      */
-    public void messageToast(int input){
+    public void messageToast(int input) {
         progressBar.setVisibility(View.GONE);
         okButton.setEnabled(true);
-        switch (input){
+        switch (input) {
             case NO_MAKE:
                 Toast.makeText(this, "You did not enter a Make", Toast.LENGTH_SHORT).show();
                 break;
@@ -148,12 +144,12 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "You did not enter a Year", Toast.LENGTH_SHORT).show();
                 break;
             case VEHICLE_DOES_NOT_EXIST:
-                Toast.makeText(this, "The vehicle "+make+" "+model+" "+yearString+" does not " +
-                                "exist or cannot be found.",
+                Toast.makeText(this, "The vehicle " + make + " " + model + " " + yearString +
+                                " does not " + "exist or cannot be found.",
                         Toast.LENGTH_SHORT).show();
                 break;
             case INVALID_YEAR:
-                Toast.makeText(this, "Invalid Year, must be between 1885 and " + (yearCurrent+1),
+                Toast.makeText(this, "Invalid Year, must be between 1885 and " + (yearCurrent + 1),
                         Toast.LENGTH_LONG).show();
                 break;
             case SUCCESS:
@@ -178,7 +174,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
      * @param menu menu to be inflated
      * @return true
      */
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }

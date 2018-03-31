@@ -1,4 +1,5 @@
 package edu.sodetzpurdue.gastimator_app;
+
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,11 +18,12 @@ import java.util.Scanner;
  * @since 9/30/2017
  */
 
-public class GetCarInfo extends AsyncTask<String, Void, String>{
+public class GetCarInfo extends AsyncTask<String, Void, String> {
 
     //AsyncResponse interface field
     public AsyncResponse delegate = null;
 
+    //TODO: Replace API key
     private final String APIKEY = "A8874x8oBWR0GdYXGccI2tYFFULXur7a";
 
     /**
@@ -56,15 +58,14 @@ public class GetCarInfo extends AsyncTask<String, Void, String>{
      * @param year, year of the vehicle
      * @return responseBody, string response of the API call
      */
-    @SuppressWarnings("nullable")
     public String shineConnect (String make, String model, String year) {
         String charset = "UTF-8";
         InputStream response = null;
         URLConnection connection;
         String url = "https://apis.solarialabs.com/shine/v1/vehicle-stats/specs?";
         try {
-            connection = new URL(url+"make="+make+"&model="+model+"&year="+year+"" +
-                    "&apikey="+APIKEY).openConnection();
+            connection = new URL(url + "make=" + make + "&model=" + model + "&year=" + year + "" +
+                    "&apikey=" + APIKEY).openConnection();
             connection.setRequestProperty("Accept-Charset", charset);
             response = connection.getInputStream();
         } catch (IOException e) {
