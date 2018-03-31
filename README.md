@@ -32,6 +32,10 @@ $ git clone https://github.com/kcsodetz/Gastimate.git
 * **Stefany Go** - [GitHub](https://github.com/StefanyGo)
 * **Shiv Paul** - [GitHub](https://github.com/shivap98)
 
+## License
+
+This project is licensed under the MIT License. See the LICENSE.md for details
+
 ## Devpost
 
 [Devpost Link](https://devpost.com/software/gastimator) 
