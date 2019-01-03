@@ -1,6 +1,7 @@
 # Gastimate
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/f8b187b447d28c4cd1b2/maintainability)](https://codeclimate.com/github/kcsodetz/Gastimate/maintainability)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
 An Android application that can estimate the amount of fuel consumed on a trip, based on the Make, Model, and Year of a vehicle, and the distance traveled between two points.
 Created for Purdue University's Boilermake V Hackathon. Winner of Liberty Mutual's Sponsor Prize.
